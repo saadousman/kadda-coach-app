@@ -10,11 +10,27 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="../index.html">Kadda Coach</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <span class="nav-link">Points: <span id="points">0</span> <img src="../assets/coin-icon.png" alt="Coin Icon"></span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">Username</span>
+        </li>
+      </ul>
+    </div>
   </nav>
   <div class="container text-center">
     <h1 class="my-4">Comprehension Game</h1>
     <div id="comprehension-game"></div>
+    <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
   </div>
   <script src="../js/comprehension.js"></script>
+  <script>
+    function navigateToHome() {
+      window.location.href = '../index.html';
+    }
+  </script>
 </body>
 </html>

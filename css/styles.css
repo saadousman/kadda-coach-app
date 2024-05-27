@@ -43,6 +43,11 @@ button {
   border-color: #28a745;
 }
 
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
 .container {
   padding: 20px;
 }
