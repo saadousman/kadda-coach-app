@@ -74,14 +74,14 @@ function startRecording() {
   // Initialize MediaRecorder for voice recording
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then(stream => {
-      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/mp4' });
+      mediaRecorder = new MediaRecorder(stream);
       mediaRecorder.ondataavailable = event => {
         if (event.data.size > 0) {
           recordedChunks.push(event.data);
         }
       };
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(recordedChunks, { type: 'video/mp4' });
+        const audioBlob = new Blob(recordedChunks, { type: 'audio/mp3' });
         const audioUrl = URL.createObjectURL(audioBlob);
         const recordedAudio = document.getElementById('recorded-audio');
         recordedAudio.src = audioUrl;
@@ -90,7 +90,7 @@ function startRecording() {
         // Create a download link
         const downloadLink = document.createElement('a');
         downloadLink.href = audioUrl;
-        downloadLink.download = 'conversation_recording.mp4';
+        downloadLink.download = 'conversation_recording.mp3';
         downloadLink.textContent = 'Download Recording';
         downloadLink.className = 'btn btn-success mt-4';
         document.body.appendChild(downloadLink);
@@ -114,7 +114,9 @@ function startRecording() {
       if (currentDialogueIndex < userBubbles.length) {
         appBubbles[currentDialogueIndex - 1].classList.add('highlighted');
         speak(appBubbles[currentDialogueIndex - 1].innerText);
-      } else {
+      } else if (currentDialogueIndex === userBubbles.length) {
+        appBubbles[currentDialogueIndex - 1].classList.add('highlighted');
+        speak(appBubbles[currentDialogueIndex - 1].innerText);
         stopRecording();
       }
     }
