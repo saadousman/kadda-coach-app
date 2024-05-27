@@ -45,10 +45,10 @@
     </div>
   </nav>
   <div class="container text-center">
+    <button class="btn btn-info mb-4" id="start-recording">Start Recording Voice</button>
     <h1 id="conversation-title" class="my-4">Conversation Title</h1>
     <div id="conversation-dialogue" class="dialogue-container d-flex flex-column align-items-start"></div>
-    <button class="btn btn-info mb-4" id="start-recording">Start Recording Voice</button>
-    <button class="btn btn-danger mb-4" id="stop-recording">Stop Recording</button>
+    <button class="btn btn-danger mb-4" id="stop-recording" style="display:none;">Stop Recording</button>
     <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
   </div>
   <div id="recording-modal" class="modal" tabindex="-1" role="dialog">
@@ -61,6 +61,7 @@
           </button>
         </div>
         <div class="modal-body">
+          <audio id="recorded-audio" controls></audio>
           <button class="btn btn-primary" id="play-recording">Play Recording</button>
         </div>
       </div>

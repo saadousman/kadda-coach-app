@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 let recognition;
+let mediaRecorder;
+let recordedChunks = [];
 let currentDialogueIndex = 0;
 
 function getQueryVariable(variable) {
@@ -57,23 +59,40 @@ function setupConversation(conversation) {
 }
 
 function startRecording() {
+  document.getElementById('start-recording').style.display = 'none';
+  document.getElementById('stop-recording').style.display = 'block';
   currentDialogueIndex = 0;
   const dialogueContainer = document.getElementById('conversation-dialogue');
   const userBubbles = dialogueContainer.getElementsByClassName('user-bubble');
   const appBubbles = dialogueContainer.getElementsByClassName('app-bubble');
 
-  userBubbles[currentDialogueIndex].classList.add('highlighted');
-  speak(appBubbles[currentDialogueIndex].innerText);
-
-  if (!('webkitSpeechRecognition' in window)) {
-    alert('Your browser does not support the Web Speech API');
+  if (!('webkitSpeechRecognition' in window) || !navigator.mediaDevices) {
+    alert('Your browser does not support the necessary Web APIs');
     return;
   }
 
+  // Initialize MediaRecorder for voice recording
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.ondataavailable = event => {
+        if (event.data.size > 0) {
+          recordedChunks.push(event.data);
+        }
+      };
+      mediaRecorder.start();
+    });
+
+  // Initialize SpeechRecognition for voice recognition
   recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = false;
   recognition.lang = 'en-US';
+
+  recognition.onstart = () => {
+    userBubbles[currentDialogueIndex].classList.add('highlighted');
+    speak(appBubbles[currentDialogueIndex].innerText);
+  };
 
   recognition.onresult = (event) => {
     userBubbles[currentDialogueIndex].classList.remove('highlighted');
@@ -93,11 +112,19 @@ function stopRecording() {
   if (recognition) {
     recognition.stop();
   }
+  if (mediaRecorder) {
+    mediaRecorder.stop();
+  }
+  document.getElementById('stop-recording').style.display = 'none';
   $('#recording-modal').modal('show');
 }
 
 function playRecording() {
-  // Implement play recording logic here
+  const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+  const audioUrl = URL.createObjectURL(audioBlob);
+  const recordedAudio = document.getElementById('recorded-audio');
+  recordedAudio.src = audioUrl;
+  recordedAudio.play();
 }
 
 function speak(text) {
