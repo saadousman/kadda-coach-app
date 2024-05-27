@@ -86,6 +86,14 @@ function startRecording() {
         const recordedAudio = document.getElementById('recorded-audio');
         recordedAudio.src = audioUrl;
         recordedAudio.style.display = 'block'; // Show the audio player
+
+        // Create a download link
+        const downloadLink = document.createElement('a');
+        downloadLink.href = audioUrl;
+        downloadLink.download = 'conversation_recording.webm';
+        downloadLink.textContent = 'Download Recording';
+        downloadLink.className = 'btn btn-success mt-4';
+        document.body.appendChild(downloadLink);
       };
       mediaRecorder.start();
     });
@@ -97,7 +105,10 @@ function startRecording() {
   recognition.lang = 'en-US';
 
   recognition.onresult = event => {
-    if (currentDialogueIndex < userBubbles.length) {
+    const userBubbles = document.getElementsByClassName('user-bubble');
+    const appBubbles = document.getElementsByClassName('app-bubble');
+
+    if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
       userBubbles[currentDialogueIndex].classList.remove('highlighted');
       currentDialogueIndex++;
       if (currentDialogueIndex < userBubbles.length) {
@@ -114,12 +125,13 @@ function startRecording() {
   };
 
   recognition.onend = () => {
-    if (currentDialogueIndex < userBubbles.length && !isSpeaking) {
+    if (!isSpeaking && currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
       recognition.start();
     }
   };
 
-  startConversation();
+  // Start the conversation with the app's first dialogue
+  speak(document.getElementsByClassName('app-bubble')[currentDialogueIndex].innerText);
 }
 
 function stopRecording() {
@@ -132,28 +144,13 @@ function stopRecording() {
   document.getElementById('stop-recording').style.display = 'none';
 }
 
-function startConversation() {
-  const userBubbles = document.getElementsByClassName('user-bubble');
-  const appBubbles = document.getElementsByClassName('app-bubble');
-
-  if (currentDialogueIndex < userBubbles.length) {
-    userBubbles[currentDialogueIndex].classList.add('highlighted');
-    speak(appBubbles[currentDialogueIndex].innerText);
-  } else {
-    stopRecording();
-  }
-}
-
 function speak(text) {
-  recognition.stop(); // Stop recognition while speaking
   isSpeaking = true;
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
     isSpeaking = false;
-    if (currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
-      recognition.start();
-    }
+    recognition.start();
   };
   window.speechSynthesis.speak(msg);
 }
