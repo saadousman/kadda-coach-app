@@ -17,6 +17,7 @@ let recognition;
 let mediaRecorder;
 let recordedChunks = [];
 let currentDialogueIndex = 0;
+let isSpeaking = false;
 
 function getQueryVariable(variable) {
   const query = window.location.search.substring(1);
@@ -94,23 +95,34 @@ function startRecording() {
   recognition.interimResults = false;
   recognition.lang = 'en-US';
 
-  recognition.onstart = () => {
-    userBubbles[currentDialogueIndex].classList.add('highlighted');
-    speak(appBubbles[currentDialogueIndex].innerText);
+  recognition.onresult = (event) => {
+    const userBubbles = document.getElementsByClassName('user-bubble');
+    const appBubbles = document.getElementsByClassName('app-bubble');
+
+    if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
+      userBubbles[currentDialogueIndex].classList.remove('highlighted');
+      currentDialogueIndex++;
+      if (currentDialogueIndex < userBubbles.length) {
+        userBubbles[currentDialogueIndex].classList.add('highlighted');
+        speak(appBubbles[currentDialogueIndex].innerText);
+      } else {
+        stopRecording();
+      }
+    }
   };
 
-  recognition.onresult = (event) => {
-    userBubbles[currentDialogueIndex].classList.remove('highlighted');
-    currentDialogueIndex++;
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+  };
+
+  recognition.onend = () => {
     if (currentDialogueIndex < userBubbles.length) {
-      userBubbles[currentDialogueIndex].classList.add('highlighted');
-      speak(appBubbles[currentDialogueIndex].innerText);
-    } else {
-      stopRecording();
+      recognition.start();
     }
   };
 
   recognition.start();
+  userBubbles[currentDialogueIndex].classList.add('highlighted');
 }
 
 function stopRecording() {
@@ -124,11 +136,18 @@ function stopRecording() {
   $('#recording-modal').modal('show');
 }
 
+function playRecording() {
+  const recordedAudio = document.getElementById('recorded-audio');
+  recordedAudio.play();
+}
+
 function speak(text) {
   recognition.stop(); // Stop recognition while speaking
+  isSpeaking = true;
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
+    isSpeaking = false;
     recognition.start(); // Restart recognition after speaking
   };
   window.speechSynthesis.speak(msg);
