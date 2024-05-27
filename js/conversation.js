@@ -160,5 +160,9 @@ function speak(text) {
       recognition.start();
     }
   };
+  // Ensure speech synthesis is used correctly on mobile
+  msg.onerror = (event) => {
+    console.error('Speech synthesis error:', event.error);
+  };
   window.speechSynthesis.speak(msg);
 }
