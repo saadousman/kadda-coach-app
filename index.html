@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kadda Coach</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=YourChosenFont:wght@400;700&display=swap');
+    body {
+      font-family: 'YourChosenFont', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .navbar {
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #ff6600; /* Example color */
+    }
+    .logo-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px; /* Rounded edges */
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px;
+      margin: 5px;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .container {
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        text-align: center;
+      }
+      .navbar-nav {
+        flex-direction: column;
+      }
+      .container {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Kadda Coach</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <span class="nav-link">Points: <span id="points">0</span> <img src="assets/coin-icon.png" alt="Coin Icon"></span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">Username</span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container text-center">
+    <h1 class="my-4">කඩ්ඩ Polish කරන APP එක</h1>
+    <img src="https://i.ibb.co/DQqCC6G/OIG1-1.jpg" alt="Kadda Coach Logo" class="mb-4 logo-img">
+    <div class="row">
+      <div class="col-12 col-md-4 mb-3">
+        <button class="btn btn-primary btn-block" onclick="navigateTo('games/translation.html')">Active Listening</button>
+      </div>
+      <div class="col-12 col-md-4 mb-3">
+        <button class="btn btn-secondary btn-block" onclick="navigateTo('games/comprehension.html')">Translation</button>
+      </div>
+      <div class="col-12 col-md-4 mb-3">
+        <button class="btn btn-success btn-block" onclick="navigateTo('games/practical.html')">Practical Conversation Practice</button>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>
