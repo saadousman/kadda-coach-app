@@ -74,14 +74,14 @@ function startRecording() {
   // Initialize MediaRecorder for voice recording
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then(stream => {
-      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/mp4' });
       mediaRecorder.ondataavailable = event => {
         if (event.data.size > 0) {
           recordedChunks.push(event.data);
         }
       };
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+        const audioBlob = new Blob(recordedChunks, { type: 'video/mp4' });
         const audioUrl = URL.createObjectURL(audioBlob);
         const recordedAudio = document.getElementById('recorded-audio');
         recordedAudio.src = audioUrl;
@@ -90,7 +90,7 @@ function startRecording() {
         // Create a download link
         const downloadLink = document.createElement('a');
         downloadLink.href = audioUrl;
-        downloadLink.download = 'conversation_recording.webm';
+        downloadLink.download = 'conversation_recording.mp4';
         downloadLink.textContent = 'Download Recording';
         downloadLink.className = 'btn btn-success mt-4';
         document.body.appendChild(downloadLink);
@@ -112,8 +112,8 @@ function startRecording() {
       userBubbles[currentDialogueIndex].classList.remove('highlighted');
       currentDialogueIndex++;
       if (currentDialogueIndex < userBubbles.length) {
-        userBubbles[currentDialogueIndex].classList.add('highlighted');
-        speak(appBubbles[currentDialogueIndex].innerText);
+        appBubbles[currentDialogueIndex - 1].classList.add('highlighted');
+        speak(appBubbles[currentDialogueIndex - 1].innerText);
       } else {
         stopRecording();
       }
@@ -130,8 +130,9 @@ function startRecording() {
     }
   };
 
-  // Start the conversation with the app's first dialogue
-  speak(document.getElementsByClassName('app-bubble')[currentDialogueIndex].innerText);
+  // Start the conversation with the user's first dialogue
+  userBubbles[currentDialogueIndex].classList.add('highlighted');
+  recognition.start();
 }
 
 function stopRecording() {
@@ -145,12 +146,17 @@ function stopRecording() {
 }
 
 function speak(text) {
+  recognition.stop(); // Stop recognition while speaking
   isSpeaking = true;
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
     isSpeaking = false;
-    recognition.start();
+    const userBubbles = document.getElementsByClassName('user-bubble');
+    if (currentDialogueIndex < userBubbles.length) {
+      userBubbles[currentDialogueIndex].classList.add('highlighted');
+      recognition.start();
+    }
   };
   window.speechSynthesis.speak(msg);
 }
