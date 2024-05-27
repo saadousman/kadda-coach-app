@@ -23,7 +23,7 @@ function getQueryVariable(variable) {
   const vars = query.split('&');
   for (let i = 0; i < vars.length; i++) {
     const pair = vars[i].split('=');
-    if (pair[0] == variable) {
+    if (pair[0] === variable) {
       return pair[1];
     }
   }
@@ -113,7 +113,7 @@ function startRecording() {
   };
 
   recognition.onend = () => {
-    if (currentDialogueIndex < userBubbles.length) {
+    if (currentDialogueIndex < userBubbles.length && !isSpeaking) {
       recognition.start();
     }
   };
@@ -144,10 +144,13 @@ function startConversation() {
 }
 
 function speak(text) {
+  recognition.stop(); // Stop recognition while speaking
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
-    recognition.start();
+    if (currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
+      recognition.start();
+    }
   };
   window.speechSynthesis.speak(msg);
 }
