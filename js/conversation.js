@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const conversationId = getQueryVariable('id'); // Assuming the conversation ID is passed in the URL
+document.addEventListener('DOMContentLoaded', () => {
+  const conversationId = getQueryVariable('id');
   fetch('../data/conversations.json')
     .then(response => response.json())
     .then(data => {
@@ -17,7 +17,6 @@ let recognition;
 let mediaRecorder;
 let recordedChunks = [];
 let currentDialogueIndex = 0;
-let isSpeaking = false;
 
 function getQueryVariable(variable) {
   const query = window.location.search.substring(1);
@@ -62,9 +61,9 @@ function startRecording() {
   document.getElementById('start-recording').style.display = 'none';
   document.getElementById('stop-recording').style.display = 'block';
   currentDialogueIndex = 0;
-  const dialogueContainer = document.getElementById('conversation-dialogue');
-  const userBubbles = dialogueContainer.getElementsByClassName('user-bubble');
-  const appBubbles = dialogueContainer.getElementsByClassName('app-bubble');
+
+  const userBubbles = document.getElementsByClassName('user-bubble');
+  const appBubbles = document.getElementsByClassName('app-bubble');
 
   if (!('webkitSpeechRecognition' in window) || !navigator.mediaDevices) {
     alert('Your browser does not support the necessary Web APIs');
@@ -92,15 +91,12 @@ function startRecording() {
 
   // Initialize SpeechRecognition for voice recognition
   recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
+  recognition.continuous = false;
   recognition.interimResults = false;
   recognition.lang = 'en-US';
 
-  recognition.onresult = (event) => {
-    const userBubbles = document.getElementsByClassName('user-bubble');
-    const appBubbles = document.getElementsByClassName('app-bubble');
-
-    if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
+  recognition.onresult = event => {
+    if (currentDialogueIndex < userBubbles.length) {
       userBubbles[currentDialogueIndex].classList.remove('highlighted');
       currentDialogueIndex++;
       if (currentDialogueIndex < userBubbles.length) {
@@ -112,18 +108,17 @@ function startRecording() {
     }
   };
 
-  recognition.onerror = (event) => {
+  recognition.onerror = event => {
     console.error('Speech recognition error:', event.error);
   };
 
   recognition.onend = () => {
-    if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
+    if (currentDialogueIndex < userBubbles.length) {
       recognition.start();
     }
   };
 
-  recognition.start();
-  userBubbles[currentDialogueIndex].classList.add('highlighted');
+  startConversation();
 }
 
 function stopRecording() {
@@ -136,21 +131,23 @@ function stopRecording() {
   document.getElementById('stop-recording').style.display = 'none';
 }
 
-function playRecording() {
-  const recordedAudio = document.getElementById('recorded-audio');
-  recordedAudio.play();
+function startConversation() {
+  const userBubbles = document.getElementsByClassName('user-bubble');
+  const appBubbles = document.getElementsByClassName('app-bubble');
+
+  if (currentDialogueIndex < userBubbles.length) {
+    userBubbles[currentDialogueIndex].classList.add('highlighted');
+    recognition.start();
+  } else {
+    stopRecording();
+  }
 }
 
 function speak(text) {
-  recognition.stop(); // Stop recognition while speaking
-  isSpeaking = true;
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
-    isSpeaking = false;
-    if (currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
-      recognition.start(); // Restart recognition after speaking
-    }
+    recognition.start();
   };
   window.speechSynthesis.speak(msg);
 }
