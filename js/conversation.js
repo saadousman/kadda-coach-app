@@ -130,5 +130,8 @@ function playRecording() {
 function speak(text) {
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
+  msg.onend = () => {
+    recognition.start();
+  };
   window.speechSynthesis.speak(msg);
 }
