@@ -17,6 +17,7 @@ let recognition;
 let mediaRecorder;
 let recordedChunks = [];
 let currentDialogueIndex = 0;
+let isSpeaking = false;
 
 function getQueryVariable(variable) {
   const query = window.location.search.substring(1);
@@ -137,7 +138,7 @@ function startConversation() {
 
   if (currentDialogueIndex < userBubbles.length) {
     userBubbles[currentDialogueIndex].classList.add('highlighted');
-    recognition.start();
+    speak(appBubbles[currentDialogueIndex].innerText);
   } else {
     stopRecording();
   }
@@ -145,9 +146,11 @@ function startConversation() {
 
 function speak(text) {
   recognition.stop(); // Stop recognition while speaking
+  isSpeaking = true;
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
+    isSpeaking = false;
     if (currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
       recognition.start();
     }
