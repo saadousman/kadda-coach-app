@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('start-recording').addEventListener('click', startRecording);
   document.getElementById('stop-recording').addEventListener('click', stopRecording);
-  document.getElementById('play-recording').addEventListener('click', playRecording);
 });
 
 let recognition;
@@ -80,6 +79,12 @@ function startRecording() {
           recordedChunks.push(event.data);
         }
       };
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const recordedAudio = document.getElementById('recorded-audio');
+        recordedAudio.src = audioUrl;
+      };
       mediaRecorder.start();
     });
 
@@ -119,19 +124,12 @@ function stopRecording() {
   $('#recording-modal').modal('show');
 }
 
-function playRecording() {
-  const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
-  const audioUrl = URL.createObjectURL(audioBlob);
-  const recordedAudio = document.getElementById('recorded-audio');
-  recordedAudio.src = audioUrl;
-  recordedAudio.play();
-}
-
 function speak(text) {
+  recognition.stop(); // Stop recognition while speaking
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = 'en-US';
   msg.onend = () => {
-    recognition.start();
+    recognition.start(); // Restart recognition after speaking
   };
   window.speechSynthesis.speak(msg);
 }
