@@ -18,11 +18,11 @@
       max-width: 80%;
     }
     .user-bubble {
-      background-color: #c5a252; /* User bubble color */
+      background-color: #c5a252;
       align-self: flex-start;
     }
     .app-bubble {
-      background-color: #80704e; /* App bubble color */
+      background-color: #80704e;
       align-self: flex-end;
     }
     .highlighted {
@@ -49,22 +49,8 @@
     <h1 id="conversation-title" class="my-4">Conversation Title</h1>
     <div id="conversation-dialogue" class="dialogue-container d-flex flex-column align-items-start"></div>
     <button class="btn btn-danger mb-4" id="stop-recording" style="display:none;">Stop Recording</button>
+    <audio id="recorded-audio" controls style="display:none; margin-top: 20px;"></audio>
     <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
-  </div>
-  <div id="recording-modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Recording</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <audio id="recorded-audio" controls></audio>
-        </div>
-      </div>
-    </div>
   </div>
   <script src="../js/conversation.js"></script>
   <script>

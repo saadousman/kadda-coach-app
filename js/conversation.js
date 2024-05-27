@@ -85,6 +85,7 @@ function startRecording() {
         const audioUrl = URL.createObjectURL(audioBlob);
         const recordedAudio = document.getElementById('recorded-audio');
         recordedAudio.src = audioUrl;
+        recordedAudio.style.display = 'block'; // Show the audio player
       };
       mediaRecorder.start();
     });
@@ -116,7 +117,7 @@ function startRecording() {
   };
 
   recognition.onend = () => {
-    if (currentDialogueIndex < userBubbles.length) {
+    if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
       recognition.start();
     }
   };
@@ -133,7 +134,6 @@ function stopRecording() {
     mediaRecorder.stop();
   }
   document.getElementById('stop-recording').style.display = 'none';
-  $('#recording-modal').modal('show');
 }
 
 function playRecording() {
@@ -148,7 +148,9 @@ function speak(text) {
   msg.lang = 'en-US';
   msg.onend = () => {
     isSpeaking = false;
-    recognition.start(); // Restart recognition after speaking
+    if (currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
+      recognition.start(); // Restart recognition after speaking
+    }
   };
   window.speechSynthesis.speak(msg);
 }
