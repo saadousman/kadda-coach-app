@@ -3,37 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Practical Conversation Practice</title>
+  <title>Casual Conversations</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
-  <style>
-    .tile-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .tile {
-      width: 200px;
-      height: 150px;
-      margin: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2em;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .work-tile {
-      background-color: #1c0600;
-    }
-    .social-tile {
-      background-color: #c5a252;
-    }
-    .casual-tile {
-      background-color: #927005;
-    }
-  </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,18 +22,14 @@
     </div>
   </nav>
   <div class="container text-center">
-    <h1 class="my-4">Practical Conversation Practice</h1>
-    <div class="tile-container">
-      <div class="tile work-tile" onclick="navigateTo('work.html')">Work Conversations</div>
-      <div class="tile social-tile" onclick="navigateTo('social.html')">Social Conversations</div>
-      <div class="tile casual-tile" onclick="navigateTo('casual.html')">Casual Conversations</div>
+    <h1 class="my-4">Casual Conversations</h1>
+    <div class="list-group">
+      <a href="conversation.html?id=casual1" class="list-group-item list-group-item-action">Meeting a Friend</a>
+      <!-- Add more example conversation links here -->
     </div>
     <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
   </div>
   <script>
-    function navigateTo(page) {
-      window.location.href = page;
-    }
     function navigateToHome() {
       window.location.href = '../index.html';
     }
