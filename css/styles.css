@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-  color: #ff6600; /* Example color */
+  color: #fcb305; /* Bright Yellow color from the palette */
 }
 
 .logo-img {
@@ -26,21 +26,28 @@ button {
   font-size: 1.2em;
   padding: 10px;
   margin: 5px;
+  border-radius: 10px;
+  color: #fff;
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #1c0600; /* Dark color from the palette */
+  border-color: #1c0600;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #c5a252; /* Light Brown color from the palette */
+  border-color: #c5a252;
 }
 
 .btn-success {
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #927005; /* Medium Brown color from the palette */
+  border-color: #927005;
+}
+
+.btn-info {
+  background-color: #80704e; /* Olive color from the palette */
+  border-color: #80704e;
 }
 
 .container {

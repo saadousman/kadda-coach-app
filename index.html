@@ -32,16 +32,20 @@
       margin: 5px;
     }
     .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
+      background-color: #1c0600;
+      border-color: #1c0600;
     }
     .btn-secondary {
-      background-color: #6c757d;
-      border-color: #6c757d;
+      background-color: #c5a252;
+      border-color: #c5a252;
     }
     .btn-success {
-      background-color: #28a745;
-      border-color: #28a745;
+      background-color: #927005;
+      border-color: #927005;
+    }
+    .btn-info {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
     }
     .container {
       padding: 20px;
@@ -65,9 +69,6 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Kadda Coach</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -95,5 +96,10 @@
     </div>
   </div>
   <script src="js/main.js"></script>
+  <script>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>
 </html>

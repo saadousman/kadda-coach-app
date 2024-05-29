@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comprehension Game</title>
+  <title>Social Conversations</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -22,11 +22,13 @@
     </div>
   </nav>
   <div class="container text-center">
-    <h1 class="my-4">Comprehension Game</h1>
-    <div id="comprehension-game"></div>
+    <h1 class="my-4">Social Conversations</h1>
+    <div class="list-group">
+      <a href="conversation.html?id=social1" class="list-group-item list-group-item-action">Chatting at a Party</a>
+      <!-- Add more example conversation links here -->
+    </div>
     <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
   </div>
-  <script src="../js/comprehension.js"></script>
   <script>
     function navigateToHome() {
       window.location.href = '../index.html';

@@ -3,9 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comprehension Game</title>
+  <title>Conversation</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .dialogue-container {
+      margin-top: 20px;
+    }
+    .dialogue-bubble {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 80%;
+    }
+    .user-bubble {
+      background-color: #c5a252;
+      align-self: flex-start;
+    }
+    .app-bubble {
+      background-color: #80704e;
+      align-self: flex-end;
+    }
+    .highlighted {
+      border: 2px solid #fcb305;
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,11 +45,14 @@
     </div>
   </nav>
   <div class="container text-center">
-    <h1 class="my-4">Comprehension Game</h1>
-    <div id="comprehension-game"></div>
+    <button class="btn btn-info mb-4" id="start-recording">Start Recording Voice</button>
+    <h1 id="conversation-title" class="my-4">Conversation Title</h1>
+    <div id="conversation-dialogue" class="dialogue-container d-flex flex-column align-items-start"></div>
+    <button class="btn btn-danger mb-4" id="stop-recording" style="display:none;">Stop Recording</button>
+    <audio id="recorded-audio" controls style="display:none; margin-top: 20px;"></audio>
     <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
   </div>
-  <script src="../js/comprehension.js"></script>
+  <script src="../js/conversation.js"></script>
   <script>
     function navigateToHome() {
       window.location.href = '../index.html';
