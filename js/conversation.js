@@ -18,6 +18,7 @@ let mediaRecorder;
 let recordedChunks = [];
 let currentDialogueIndex = 0;
 let isSpeaking = false;
+let isListening = false;
 
 function getQueryVariable(variable) {
   const query = window.location.search.substring(1);
@@ -105,9 +106,6 @@ function startRecording() {
   recognition.lang = 'en-US';
 
   recognition.onresult = event => {
-    const userBubbles = document.getElementsByClassName('user-bubble');
-    const appBubbles = document.getElementsByClassName('app-bubble');
-
     if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
       userBubbles[currentDialogueIndex].classList.remove('highlighted');
       currentDialogueIndex++;
@@ -135,8 +133,10 @@ function startRecording() {
   };
 
   recognition.onend = () => {
-    if (!isSpeaking && currentDialogueIndex < document.getElementsByClassName('user-bubble').length) {
-      recognition.start();
+    if (!isSpeaking && currentDialogueIndex < userBubbles.length) {
+      if (!isListening) {
+        recognition.start();
+      }
     }
   };
 
