@@ -113,11 +113,19 @@ function startRecording() {
       currentDialogueIndex++;
       if (currentDialogueIndex < userBubbles.length) {
         appBubbles[currentDialogueIndex - 1].classList.add('highlighted');
-        speak(appBubbles[currentDialogueIndex - 1].innerText);
+        speak(appBubbles[currentDialogueIndex - 1].innerText).then(() => {
+          if (currentDialogueIndex < userBubbles.length) {
+            userBubbles[currentDialogueIndex].classList.add('highlighted');
+            recognition.start();
+          } else {
+            stopRecording();
+          }
+        });
       } else if (currentDialogueIndex === userBubbles.length) {
         appBubbles[currentDialogueIndex - 1].classList.add('highlighted');
-        speak(appBubbles[currentDialogueIndex - 1].innerText);
-        stopRecording();
+        speak(appBubbles[currentDialogueIndex - 1].innerText).then(() => {
+          stopRecording();
+        });
       }
     }
   };
@@ -148,21 +156,20 @@ function stopRecording() {
 }
 
 function speak(text) {
-  recognition.stop(); // Stop recognition while speaking
-  isSpeaking = true;
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = 'en-US';
-  msg.onend = () => {
-    isSpeaking = false;
-    const userBubbles = document.getElementsByClassName('user-bubble');
-    if (currentDialogueIndex < userBubbles.length) {
-      userBubbles[currentDialogueIndex].classList.add('highlighted');
-      recognition.start();
-    }
-  };
-  // Ensure speech synthesis is used correctly on mobile
-  msg.onerror = (event) => {
-    console.error('Speech synthesis error:', event.error);
-  };
-  window.speechSynthesis.speak(msg);
+  return new Promise((resolve, reject) => {
+    recognition.stop(); // Stop recognition while speaking
+    isSpeaking = true;
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = 'en-US';
+    msg.onend = () => {
+      isSpeaking = false;
+      resolve();
+    };
+    msg.onerror = (event) => {
+      isSpeaking = false;
+      console.error('Speech synthesis error:', event.error);
+      reject(event.error);
+    };
+    window.speechSynthesis.speak(msg);
+  });
 }
