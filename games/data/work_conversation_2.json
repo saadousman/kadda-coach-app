@@ -1,0 +1,26 @@
+  {
+    "title": "Work Conversation 2",
+    "dialogue": [
+      {
+        "user": "Can we talk about launching our Ayurveda soap and shampoo?",
+        "app": "Sure, we’ve finished the product recipes and packaging."
+      },
+      {
+        "user": "That’s great. Any problems we need to fix?",
+        "app": "We need to make sure all products pass safety standards and get certified."
+      },
+      {
+        "user": "Let’s focus on getting the certifications first.",
+        "app": "Agreed, we’ll work on that."
+      },
+      {
+        "user": "Anything else important?",
+        "app": "Our pre-launch campaign is getting a lot of interest and good feedback."
+      },
+      {
+        "user": "Fantastic! Let’s keep up the excitement.",
+        "app": "Thank you, we will."
+      }
+    ]
+  }
+  
