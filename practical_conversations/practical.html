@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical Conversations</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="../index.html">Kadda Coach</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <span class="nav-link">Points: <span id="points">0</span> <img src="../assets/coin-icon.png" alt="Coin Icon"></span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">Username</span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container text-center">
+    <h1 class="my-4">Choose a Practical Conversation</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <a href="work_conversation_1.html" class="btn btn-primary btn-block">Work Conversation 1</a>
+      </div>
+      <div class="col-md-4">
+        <a href="work_conversation_2.html" class="btn btn-primary btn-block">Work Conversation 2</a>
+      </div>
+      <div class="col-md-4">
+        <a href="work_conversation_3.html" class="btn btn-primary btn-block">Work Conversation 3</a>
+      </div>
+      <div class="col-md-4">
+        <a href="work_conversation_4.html" class="btn btn-primary btn-block">Work Conversation 4</a>
+      </div>
+    </div>
+    <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
+  </div>
+  <script>
+    function navigateToHome() {
+      window.location.href = '../index.html';
+    }
+  </script>
+</body>
+</html>

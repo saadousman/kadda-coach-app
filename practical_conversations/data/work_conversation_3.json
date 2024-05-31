@@ -1,0 +1,26 @@
+  {
+    "title": "Work Conversation 3",
+    "dialogue": [
+      {
+        "user": "Can we discuss the plan for opening our Kottu Roti franchise?",
+        "app": "Of course, we have secured prime locations for our first outlets."
+      },
+      {
+        "user": "That's great progress. Any potential hurdles?",
+        "app": "We need to focus on training staff to maintain quality and consistency."
+      },
+      {
+        "user": "Let's prioritize staff training before the launch.",
+        "app": "Agreed, we'll ensure all staff are well-prepared."
+      },
+      {
+        "user": "Any other important considerations?",
+        "app": "Our marketing campaign has generated a lot of interest on social media."
+      },
+      {
+        "user": "Excellent! Let's build on that excitement.",
+        "app": "Thank you, we will."
+      }
+    ]
+  }
+  
