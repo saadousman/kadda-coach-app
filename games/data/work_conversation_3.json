@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
   {
     "title": "Work Conversation 3",
     "dialogue": [
@@ -20,6 +21,30 @@
       {
         "user": "Excellent! Let's build on that excitement.",
         "app": "Thank you, we will."
+=======
+{
+    "title": "Work Conversation 3",
+    "dialogue": [
+      {
+        "user": "How is the progress on the new feature?",
+        "app": "We have completed the design phase and are moving into development."
+      },
+      {
+        "user": "Do we have an estimated completion date?",
+        "app": "We expect to complete the feature by the end of next month."
+      },
+      {
+        "user": "Are there any blockers?",
+        "app": "No major blockers, but we are waiting on some feedback from the client."
+      },
+      {
+        "user": "Let me know if there's anything I can do to help.",
+        "app": "Thank you, will do."
+      },
+      {
+        "user": "Keep up the good work.",
+        "app": "Thanks, we will."
+>>>>>>> Stashed changes
       }
     ]
   }

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
   {
     "title": "Work Conversation 2",
     "dialogue": [
@@ -20,6 +21,30 @@
       {
         "user": "Fantastic! Let’s keep up the excitement.",
         "app": "Thank you, we will."
+=======
+{
+    "title": "Work Conversation 2",
+    "dialogue": [
+      {
+        "user": "Can you update me on the project status?",
+        "app": "The project is on track, and we have completed 70% of the tasks."
+      },
+      {
+        "user": "Are there any issues we need to address?",
+        "app": "There are a few minor bugs, but the development team is handling them."
+      },
+      {
+        "user": "Great, let me know if you need any help.",
+        "app": "Sure, thank you. We'll keep you updated."
+      },
+      {
+        "user": "When is the next milestone deadline?",
+        "app": "The next milestone deadline is next Friday."
+      },
+      {
+        "user": "Are we on schedule to meet it?",
+        "app": "Yes, we are on schedule to meet the deadline."
+>>>>>>> Stashed changes
       }
     ]
   }

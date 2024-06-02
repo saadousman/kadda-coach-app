@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
   {
     "title": "Work Conversation 4",
     "dialogue": [
@@ -20,6 +21,30 @@
       {
         "user": "Excellent! Let's maintain this progress.",
         "app": "Thank you, we'll keep pushing forward."
+=======
+{
+    "title": "Work Conversation 4",
+    "dialogue": [
+      {
+        "user": "Can we discuss the quarterly performance?",
+        "app": "Sure, the team has exceeded most of the targets."
+      },
+      {
+        "user": "That's great to hear. Any areas of concern?",
+        "app": "We need to improve our response time for customer queries."
+      },
+      {
+        "user": "Let's prioritize that for the next quarter.",
+        "app": "Agreed, we'll focus on improving our customer support."
+      },
+      {
+        "user": "Any other highlights?",
+        "app": "Our sales have increased by 20% compared to the last quarter."
+      },
+      {
+        "user": "Fantastic! Keep pushing forward.",
+        "app": "Thank you, we will."
+>>>>>>> Stashed changes
       }
     ]
   }

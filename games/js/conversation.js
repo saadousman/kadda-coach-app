@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const conversationId = getQueryVariable('id');
+<<<<<<< Updated upstream
     fetch(`../data/${conversationId}.json`)
+=======
+    fetch(`data/${conversationId}.json`)
+>>>>>>> Stashed changes
       .then(response => response.json())
       .then(data => {
         const conversation = data;

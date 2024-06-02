@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conversation</title>
+  <title>Work Conversation 1</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
   <style>
     .dialogue-container {
       margin-top: 20px;
@@ -36,7 +36,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <span class="nav-link">Points: <span id="points">0</span> <img src="../assets/coin-icon.png" alt="Coin Icon"></span>
+          <span class="nav-link">Points: <span id="points">0</span> <img src="assets/coin-icon.png" alt="Coin Icon"></span>
         </li>
         <li class="nav-item">
           <span class="nav-link">Username</span>
@@ -46,13 +46,13 @@
   </nav>
   <div class="container text-center">
     <button class="btn btn-info mb-4" id="start-recording">Start Recording Voice</button>
-    <h1 id="conversation-title" class="my-4">Conversation Title</h1>
+    <h1 id="conversation-title" class="my-4">Work Conversation 1</h1>
     <div id="conversation-dialogue" class="dialogue-container d-flex flex-column align-items-start"></div>
     <button class="btn btn-danger mb-4" id="stop-recording" style="display:none;">Stop Recording</button>
     <audio id="recorded-audio" controls style="display:none; margin-top: 20px;"></audio>
     <button class="btn btn-info mt-4" onclick="navigateToHome()">Click here to return to homepage</button>
   </div>
-  <script src="../js/conversation.js"></script>
+  <script src="js/conversation.js"></script>
   <script>
     function navigateToHome() {
       window.location.href = '../index.html';
